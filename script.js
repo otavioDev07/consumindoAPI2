@@ -1,5 +1,5 @@
 async function mostrarProdutos(){
-    const apiURL ="https://7c50d5bb-c1cf-4c6e-9074-712d61828b26-00-3ulv4zods9g96.kirk.replit.dev/getall";
+    const apiURL ="http://10.142.227.110/getall";
     try{
         const consulta = await fetch(apiURL);
         console.log(consulta);
@@ -12,14 +12,29 @@ async function mostrarProdutos(){
         }
     catch (error){
         console.error("Erro ao buscar informações", error);
+        
     }
-    }
+}
 
 function atualizaLista(dados){
     let produtos = document.getElementById("produto");
+    produtos.style.display = "flex"
     produtos.innerHTML= "";
-    for (let i in dados){
-        console.log(i)
-        produtos.innerHTML += `Produto: ${i.nome}`;
+    for (let i of dados){
+        produtos.innerHTML += `<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card" style="width: 18rem;">
+                <img src="https://img.freepik.com/vetores-gratis/ilustracao-de-galeria-icone_53876-27002.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">${i.nome}</h5>
+                        <p class="card-text">${i.descricao}</p>
+                        <a href="#" class="btn btn-primary">${i.valor}</a>
+                    </div>
+            </div>
+        </div>`
     }
+}
+
+function esconderProdutos(){
+    product = document.getElementById('produto')
+    product.style.display = "none"
 }
